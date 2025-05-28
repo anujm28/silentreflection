@@ -1,95 +1,95 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import NoteEditor from '../components/NoteEditor';
+import NoteList from '../components/NoteList';
+import { encryptNote, decryptNote, generateId } from '../utils/encryption';
+import styles from './page.module.css';
+
+interface Note {
+  id: string;
+  content: string;
+  scheme: string;
+  timestamp: string;
+}
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const handleEncrypt = async (note: string, scheme: string) => {
+    if (!note.trim()) return;
+    
+    setIsLoading(true);
+    try {
+      const encryptedContent = await encryptNote(note, scheme);
+      const newNote: Note = {
+        id: generateId(),
+        content: encryptedContent,
+        scheme,
+        timestamp: new Date().toISOString(),
+      };
+      setNotes(prev => [newNote, ...prev]);
+    } catch (error) {
+      console.error('Encryption failed:', error);
+      alert('Failed to encrypt note');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDecrypt = async (note: Note) => {
+    setIsLoading(true);
+    try {
+      const decryptedContent = await decryptNote(note.content);
+      alert(`Decrypted content: ${decryptedContent}`);
+    } catch (error) {
+      console.error('Decryption failed:', error);
+      alert('Failed to decrypt note');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = (id: string) => {
+    setNotes(prev => prev.filter(note => note.id !== id));
+  };
+
+  return (
+    <div className={styles.container}>
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <h2 className={styles.title}>Create Encrypted Note</h2>
+            <p className={styles.subtitle}>
+              Choose your encryption scheme and write your secure note
+            </p>
+          </div>
+
+          <NoteEditor
+            onEncrypt={handleEncrypt}
+            onDecrypt={() => {}}
+            isLoading={isLoading}
+          />
+
+          <div className={styles.notesSection}>
+            <div className={styles.notesHeader}>
+              <h2 className={styles.notesTitle}>Your Encrypted Notes</h2>
+              <span className={styles.notesCount}>
+                {notes.length} {notes.length === 1 ? 'note' : 'notes'}
+              </span>
+            </div>
+            <NoteList
+              notes={notes}
+              onDecrypt={handleDecrypt}
+              onDelete={handleDelete}
+              isLoading={isLoading}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }

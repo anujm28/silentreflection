@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './PerformanceReport.module.css';
+import { encryptionAlgorithms } from '../../utils/encryptionAlgorithmsImpl';
+import { performanceTracker } from '../../utils/performanceMetrics';
 
 export interface AlgorithmPerformanceMetric {
   algorithm: string;

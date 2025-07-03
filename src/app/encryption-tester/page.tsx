@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { encryptionAlgorithms } from '@/utils/encryptionAlgorithmsImpl';
-import { performanceTracker } from '@/utils/performanceMetrics';
+import { encryptionAlgorithms } from '../../utils/encryptionAlgorithmsImpl';
+import { performanceTracker } from '../../utils/performanceMetrics';
 
 export default function EncryptionTester() {
   const [selectedAlgo, setSelectedAlgo] = useState(encryptionAlgorithms[0]);

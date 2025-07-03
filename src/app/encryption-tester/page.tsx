@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { encryptionAlgorithms } from '@/utils/encryptionAlgorithmsImpl';
 import { performanceTracker } from '@/utils/performanceMetrics';

@@ -1,0 +1,247 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 24px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.liveMetrics {
+  background-color: #f3f4f6;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.liveMetrics h3 {
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.metric:last-child {
+  margin-bottom: 0;
+}
+
+.startTest {
+  text-align: center;
+  padding: 32px;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.startButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.startButton:hover {
+  background-color: #2563eb;
+}
+
+.progressContainer {
+  margin: 20px 0;
+}
+
+.progressBar {
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.results {
+  margin-top: 24px;
+}
+
+.summary {
+  background-color: #f3f4f6;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.summary h3 {
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryItem span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.summaryItem strong {
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.detailedResults {
+  margin-top: 24px;
+}
+
+.detailedResults h3 {
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.resultsTable th,
+.resultsTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.resultsTable th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.resultsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.success {
+  color: #059669;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.retryButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 20px;
+}
+
+.retryButton:hover {
+  background-color: #2563eb;
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.testButton,
+.reportButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.testButton:hover,
+.reportButton:hover {
+  background-color: #e0e0e0;
+}
+
+.testButton:disabled,
+.reportButton:disabled {
+  background-color: #f9f9f9;
+  color: #aaa;
+  cursor: not-allowed;
+} 

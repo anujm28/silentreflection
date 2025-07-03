@@ -1,0 +1,276 @@
+/* Overlay styles */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Modal box styles */
+.modal {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(44,0,80,0.10);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  padding: 2.5rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.18s;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.header, .summary, .details {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterSection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filterGroup label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background-color: white;
+  font-size: 0.875rem;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.summarySection {
+  background-color: #f8fafc;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.summarySection h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.summaryLabel {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.summaryValue {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.tableSection {
+  margin-top: 1.5rem;
+}
+
+.tableSection h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+}
+
+.tableContainer {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: white;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  min-width: 600px;
+}
+
+.table th {
+  background-color: #f8fafc;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover {
+  background-color: #f8fafc;
+}
+
+.success {
+  color: #059669;
+  font-weight: 500;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.noData {
+  text-align: center;
+  color: #64748b;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* Responsive table wrapper */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    max-width: 98vw;
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+    max-height: 95vh;
+  }
+  .summary {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .filterSection {
+    flex-direction: column;
+  }
+
+  .filterGroup {
+    min-width: auto;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal {
+    padding: 0.75rem;
+  }
+
+  .modalHeader h2 {
+    font-size: 1.25rem;
+  }
+
+  .summarySection {
+    padding: 1rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+} 

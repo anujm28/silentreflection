@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
-import Button from './Button';
+import React, { useState, useEffect } from 'react';
 import styles from './NoteEditor.module.css';
+import { encryptionAlgorithms } from '../utils/encryptionAlgorithmsImpl';
 
 interface NoteEditorProps {
-  onEncrypt: (note: string, scheme: string) => void;
-  onDecrypt: (note: string) => void;
+  onSave: (note: string) => void;
   isLoading?: boolean;
+  onClose?: () => void;
 }
 
-const NoteEditor: React.FC<NoteEditorProps> = ({ onEncrypt, onDecrypt, isLoading = false }) => {
+const NoteEditor: React.FC<NoteEditorProps> = ({ onSave, isLoading = false, onClose }) => {
   const [note, setNote] = useState('');
-  const [scheme, setScheme] = useState('kyber-aes');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (note.trim()) {
+      onSave(note);
+      setNote('');
+    }
+  };
 
   const handleClear = () => {
     setNote('');
   };
 
   return (
-    <div className={styles.editor}>
+    <form onSubmit={handleSubmit} className={styles.editor}>
       <div className={styles.section}>
         <label htmlFor="note" className={styles.label}>
           Your Note
@@ -28,48 +35,27 @@ const NoteEditor: React.FC<NoteEditorProps> = ({ onEncrypt, onDecrypt, isLoading
           onChange={(e) => setNote(e.target.value)}
           placeholder="Enter your note here..."
           className={styles.textarea}
+          autoFocus
         />
       </div>
-      
-      <div className={styles.section}>
-        <label htmlFor="scheme" className={styles.label}>
-          Encryption Scheme
-        </label>
-        <select
-          id="scheme"
-          value={scheme}
-          onChange={(e) => setScheme(e.target.value)}
-          className={styles.select}
-        >
-          <option value="kyber-aes">Kyber + AES</option>
-          <option value="rsa-aes">RSA + AES</option>
-          <option value="ecdh-aes">ECDH + AES</option>
-        </select>
-      </div>
-
       <div className={styles.controls}>
-        <Button 
-          onClick={() => onEncrypt(note, scheme)}
+        <button 
+          type="submit"
+          className={styles.saveButton}
           disabled={isLoading || !note.trim()}
         >
-          {isLoading ? 'Encrypting...' : 'Encrypt & Save'}
-        </Button>
-        <Button 
-          onClick={() => onDecrypt(note)}
-          variant="secondary"
-          disabled={isLoading || !note.trim()}
-        >
-          Decrypt Note
-        </Button>
-        <Button 
+          {isLoading ? 'Saving...' : 'Save Note'}
+        </button>
+        <button 
+          type="button"
           onClick={handleClear}
-          variant="danger"
+          className={styles.clearButton}
           disabled={isLoading || !note.trim()}
         >
           Clear
-        </Button>
+        </button>
       </div>
-    </div>
+    </form>
   );
 };
 
